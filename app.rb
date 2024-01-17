@@ -1,4 +1,11 @@
-require_relative "dentist_office"
+require_relative 'patient'
+require_relative 'dentist_office'
 
-office =  DentistOffice.new
-office.run
+class App
+  def self.run
+    office = DentistOffice.new
+    office.run
+  end
+end
+
+App.run

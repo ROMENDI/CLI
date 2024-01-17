@@ -6,7 +6,7 @@ class DentistOffice
   end
 
   def add_patient(name)
-    @patients[name] = Patient.new(name) unless @patients.key?(name)
+    @patients[name] ||= Patient.new(name)
   end
 
   def find_patient(name)
@@ -21,7 +21,7 @@ class DentistOffice
       puts "3. View Appointments"
       puts "4. Exit"
       choice = gets.chomp.to_i
-    
+
       case choice
       when 1
         print "Enter your name: "
@@ -30,20 +30,20 @@ class DentistOffice
         date = gets.chomp
         print "Enter procedure type: "
         procedure = gets.chomp
-        office.add_patient(name)
-        patient = office.find_patient(name)
+        add_patient(name)
+        patient = @patients[name]
         patient.schedule_appointment(date, procedure)
       when 2
         print "Enter your name: "
         name = gets.chomp
         print "Enter appointment date to delete: "
         date = gets.chomp
-        patient = office.find_patient(name)
+        patient = @patients[name]
         patient.delete_appointment(date) if patient
       when 3
         print "Enter your name: "
         name = gets.chomp
-        patient = office.find_patient(name)
+        patient = @patients[name]
         patient.view_appointments if patient
       when 4
         puts "Goodbye!"
@@ -52,6 +52,6 @@ class DentistOffice
         puts "Invalid choice. Please try again."
       end
     end
-  end 
+  end
   
 end
