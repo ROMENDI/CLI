@@ -6,13 +6,13 @@ class DentistOffice
   end
 
   def add_patient(name)
-    @patients[name] ||= Patient.new(name)
+    @patients[name] = Patient.new(name) unless @patients.key?(name)
   end
 
   def find_patient(name)
     @patients[name]
   end
-
+  
   def run
     loop do
       puts "Welcome to the Dentist Office Scheduler!"
@@ -53,5 +53,5 @@ class DentistOffice
       end
     end
   end
-  
+
 end

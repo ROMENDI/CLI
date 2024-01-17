@@ -21,4 +21,5 @@ class Patient
       puts "Date: #{appointment[:date]}, Procedure: #{appointment[:procedure]}"
     end
   end
+  
 end
