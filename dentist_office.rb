@@ -36,15 +36,25 @@ class DentistOffice
       when 2
         print "Enter your name: "
         name = gets.chomp
-        print "Enter appointment date to delete: "
-        date = gets.chomp
-        patient = @patients[name]
-        patient.delete_appointment(date) if patient
+        patient = find_patient(name)
+        if patient
+          patient.view_appointments
+          print "Enter appointment date to delete: "
+          date = gets.chomp
+          patient = @patients[name]
+        patient.delete_appointment(date) 
+        else
+          puts "#{name} does not have any appointments to delete."
+        end
       when 3
         print "Enter your name: "
         name = gets.chomp
-        patient = @patients[name]
-        patient.view_appointments if patient
+        patient = find_patient(name)
+        if patient
+          patient.view_appointments
+        else
+          puts "#{name} does not have any appointments to view."
+        end
       when 4
         puts "Goodbye!"
         break
