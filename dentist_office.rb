@@ -5,6 +5,9 @@ class DentistOffice
     @patients = {}
   end
 
+  def appointment_exists?(date)
+    @patients.any? { |_, patient| patient.appointments.any? { |appointment| appointment[:date] == date } }
+  end
   def add_patient(name)
     @patients[name] = Patient.new(name) unless @patients.key?(name)
   end
@@ -28,11 +31,15 @@ class DentistOffice
         name = gets.chomp
         print "Enter appointment date (e.g., 2024-01-30): "
         date = gets.chomp
+        if appointment_exists?(date)
+          puts "An appointment is already scheduled by someone on #{date}."
+        else
         print "Enter procedure type: "
         procedure = gets.chomp
         add_patient(name)
         patient = @patients[name]
         patient.schedule_appointment(date, procedure)
+        end
       when 2
         print "Enter your name: "
         name = gets.chomp
