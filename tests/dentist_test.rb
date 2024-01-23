@@ -1,6 +1,6 @@
 require 'minitest/autorun'
-require_relative 'dentist_office'
-require_relative 'patient'
+require_relative '../dentist_office'
+require_relative '../patient'
 
 class DentistOfficeTest < Minitest::Test
   
